@@ -263,6 +263,17 @@ static unsigned int _adreno_iommu_set_pt_v2_a6xx(struct kgsl_device *device,
 		*cmds++ = 0x0;
 	}	
 
+	/* Wait for performance counter clear to finish */
+	if (!adreno_dev->perfcounter) {
+		*cmds++ = cp_type7_packet(CP_WAIT_REG_MEM, 6);
+		*cmds++ = 0x3;
+		*cmds++ = A6XX_RBBM_PERFCTR_SRAM_INIT_STATUS;
+		*cmds++ = 0x0;
+		*cmds++ = 0x1;
+		*cmds++ = 0x1;
+		*cmds++ = 0x0;
+	}
+
 	return cmds - cmds_orig;
 }
 
