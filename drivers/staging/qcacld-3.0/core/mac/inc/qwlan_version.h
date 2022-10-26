@@ -32,9 +32,29 @@
 #define QWLAN_VERSION_MAJOR            2
 #define QWLAN_VERSION_MINOR            0
 #define QWLAN_VERSION_PATCH            8
-#define QWLAN_VERSION_EXTRA            ""
+#if defined(CONFIG_LITHIUM)
+#if defined(QCA_WIFI_QCA6390) //Hastings
+#define QWLAN_VERSION_EXTRA            "-HS220506A"
+#elif defined(QCA_WIFI_QCA6490) // Hastings Prime
+#define QWLAN_VERSION_EXTRA            "-HP220506A"
+#else
+#define QWLAN_VERSION_EXTRA            "-QCOM"
+#endif
+#else
+#define QWLAN_VERSION_EXTRA            "-HL220506A"
+#endif
 #define QWLAN_VERSION_BUILD            31
 
-#define QWLAN_VERSIONSTR               "2.0.8.31"
+#if defined(CONFIG_LITHIUM)
+#if defined(QCA_WIFI_QCA6390) //Hastings
+#define QWLAN_VERSIONSTR               "2.0.8.31-HS220506A"
+#elif defined(QCA_WIFI_QCA6490) // Hastings Prime
+#define QWLAN_VERSIONSTR               "2.0.8.31-HP220506A"
+#else
+#define QWLAN_VERSIONSTR               "2.0.8.31-QCOM"
+#endif
+#else
+#define QWLAN_VERSIONSTR               "2.0.8.31-HL220506A"
+#endif
 
 #endif /* QWLAN_VERSION_H */
